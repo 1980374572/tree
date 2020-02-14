@@ -24,4 +24,6 @@ public class DepartmentController {
         List<DepartmentNode> departmentNodeList = departmentService.selectChildren(departmentId);
         return departmentNodeList;
     }
+
+
 }

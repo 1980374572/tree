@@ -86,12 +86,12 @@
     where department_id = #{departmentId,jdbcType=INTEGER}
   </update>
 
-<!-- custom -->
-
-  <select id="selectChildren" parameterType="java.lang.Integer" resultMap="DepartmentNode">
+  <!--  custom-->
+  <select id="selectChildren" resultMap="DepartmentNode">
     select
     <include refid="Base_Column_List" />
     from zhoukao0214_department
-    where department_id = #{departmentId,jdbcType=INTEGER}
+    where parent_id = #{departmentId,jdbcType=INTEGER}
+    order by sort_order
   </select>
 </mapper>

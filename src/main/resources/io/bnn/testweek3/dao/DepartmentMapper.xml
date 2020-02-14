@@ -7,6 +7,12 @@
     <result column="parent_id" jdbcType="INTEGER" property="parentId" />
     <result column="sort_order" jdbcType="INTEGER" property="sortOrder" />
   </resultMap>
+  <resultMap id="DepartmentNode" type="io.bnn.testweek3.dto.out.DepartmentNode">
+    <id column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <collection property="subDepartments" javaType="ArrayList" column="department_id" ofType="io.bnn.testweek3.dto.out.DepartmentNode" select="selectChildren"/>
+  </resultMap>
   <sql id="Base_Column_List">
     department_id, name, parent_id, sort_order
   </sql>
@@ -79,4 +85,13 @@
       sort_order = #{sortOrder,jdbcType=INTEGER}
     where department_id = #{departmentId,jdbcType=INTEGER}
   </update>
+
+<!-- custom -->
+
+  <select id="selectChildren" parameterType="java.lang.Integer" resultMap="DepartmentNode">
+    select
+    <include refid="Base_Column_List" />
+    from zhoukao0214_department
+    where department_id = #{departmentId,jdbcType=INTEGER}
+  </select>
 </mapper>
